@@ -4,7 +4,7 @@
 ## 💪 아키텍쳐
 
 ## 💪 ERD
-![su (2)](https://github.com/sunine530/LookAtMeong/assets/133097223/dc8b06f8-5cf6-4e42-bd8f-3e63281f5d79)
+![su (2)](https://github.com/sunine530/Look_At_Meong/assets/133097223/f8b48edc-62dc-4041-8f93-d69d09a4ea2e)
 
 ## 💪 주요 기능
 - [ ] 회원 CRUD
