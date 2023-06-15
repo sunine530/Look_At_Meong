@@ -6,13 +6,11 @@ import javax.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
-import org.springframework.stereotype.Service;
+import lombok.NoArgsConstructor;
 
 @Getter
-@Setter
 @AllArgsConstructor
-@NotBlank
+@NoArgsConstructor
 @Builder
 public class SignUpFormDto {
 
