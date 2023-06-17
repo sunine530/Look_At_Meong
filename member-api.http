@@ -1,4 +1,4 @@
-### 회원 가입
+### 회원 가입 - 같은 이메일로 로그인하면 MemberException 반환
 POST http://localhost:8081/signup/member
 Content-Type: application/json
 
