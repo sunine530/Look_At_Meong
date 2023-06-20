@@ -1,6 +1,7 @@
 package com.su.look_at_meong.config;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -22,8 +23,7 @@ public class SecurityConfig {
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
             .authorizeRequests()
-            .antMatchers("/signup/**").permitAll()
-            .antMatchers("/**").authenticated()
+            .antMatchers("/**").permitAll()
             .and()
             //TODO jwt 필터 추가
             .build();
