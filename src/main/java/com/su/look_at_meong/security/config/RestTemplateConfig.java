@@ -1,4 +1,4 @@
-package com.su.look_at_meong.config;
+package com.su.look_at_meong.security.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
