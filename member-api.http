@@ -8,3 +8,12 @@ Content-Type: application/json
   "name": "홍길동",
   "phone": "010-1111-1111"
 }
+
+###로그인 성공
+POST http://localhost:8081/signIn/member
+Content-Type: application/json
+
+{
+  "email": "test@test.com",
+  "password": "1234"
+}
