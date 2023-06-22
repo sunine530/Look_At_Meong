@@ -49,7 +49,10 @@ class SignInControllerTest {
         SignInDto request = signInDto();
 
         given(memberService.signIn(any()))
-            .willReturn(TokenDto.builder().build());
+            .willReturn(TokenDto.builder()
+                .accessToken("accessToken")
+                .refreshToken("refreshToken")
+                .build());
 
         //when
         ResultActions resultActions = mockMvc.perform(

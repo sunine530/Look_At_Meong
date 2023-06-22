@@ -13,6 +13,7 @@ public enum MemberErrorCode implements ErrorCode {
     PASSWORD_ENTERED_IS_INCORRECT(HttpStatus.BAD_REQUEST, "입력하신 비밀번호가 올바르지 않습니다."),
     ALREADY_RESISTER_EMAIL(HttpStatus.BAD_REQUEST, "이미 가입된 이메일입니다."),
     INVALID_PARSE_ERROR(HttpStatus.BAD_REQUEST, "JSON 파싱에 실패하였습니다."),
+    ALREADY_LOGOUT_MEMBER(HttpStatus.BAD_REQUEST, " 로그아웃된 사용자 입니다."),
     ;
 
     private final HttpStatus httpStatus;

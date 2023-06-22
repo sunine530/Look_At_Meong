@@ -1,6 +1,7 @@
 package com.su.look_at_meong.controller.oauth;
 
 import com.su.look_at_meong.service.oauth.OAuthService;
+import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -22,5 +23,11 @@ public class OAuthController {
 
         log.info("###Code : {}###", code);
         return ResponseEntity.ok(oAuthService.kakaoLogin(code));
+    }
+
+    @GetMapping("/kakao/logout")
+    public ResponseEntity<?> kakaoLogout(HttpServletRequest request) {
+
+        return ResponseEntity.ok(oAuthService.kakaoLogout(request));
     }
 }

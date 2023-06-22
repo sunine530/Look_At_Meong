@@ -36,6 +36,7 @@ public class JwtProvider {
     private final Key key;
     private static final String AUTHORITIES_KEY = "auth";
     private static final String BEARER_TYPE = "bearer";
+    private static final String CLAIM_KEY = "email";
     private static final long ACCESS_TOKEN_EXPIRE_TIME = 1000 * 60 * 30; // access 30분
     private static final long REFRESH_TOKEN_EXPIRE_TIME = 1000 * 60 * 60 * 24 * 7; // refresh 7일
 
@@ -89,6 +90,16 @@ public class JwtProvider {
         UserDetails principal = new User(claims.getSubject(), "", authorities);
 
         return new UsernamePasswordAuthenticationToken(principal, "", authorities);
+    }
+
+    public String getEmail(String token) {
+        return parseClaims(token).get(CLAIM_KEY, String.class);
+    }
+
+    public long getExpiration(String token) {
+        long time = System.currentTimeMillis();
+        Date expiration = parseClaims(token).getExpiration();
+        return expiration.getTime() - time;
     }
 
     // 토큰 유효성 검증
