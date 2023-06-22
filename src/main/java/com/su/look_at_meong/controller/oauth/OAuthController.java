@@ -17,11 +17,10 @@ public class OAuthController {
 
     private final OAuthService oAuthService;
 
-    @GetMapping("/kakao/callback")
-    public ResponseEntity<?> kakaoCallback(@RequestParam(name = "code") String code) {
-        log.info("###Code : {}###", code);
+    @GetMapping("/kakao/login")
+    public ResponseEntity<?> kakaoLogin(@RequestParam(name = "code") String code) {
 
-        String accessToken = oAuthService.getKaKaoAccessToken(code);
-        return ResponseEntity.ok(accessToken);
+        log.info("###Code : {}###", code);
+        return ResponseEntity.ok(oAuthService.kakaoLogin(code));
     }
 }

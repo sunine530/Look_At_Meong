@@ -1,5 +1,9 @@
 package com.su.look_at_meong.service.oauth;
 
+import static com.su.look_at_meong.exception.constant.MemberErrorCode.INVALID_PARSE_ERROR;
+
+import com.su.look_at_meong.config.jwt.JwtProvider;
+import com.su.look_at_meong.exception.RestApiException;
 import com.su.look_at_meong.model.member.dto.TokenDto;
 import com.su.look_at_meong.model.member.entity.Member;
 import com.su.look_at_meong.repository.MemberRepository;
@@ -30,8 +34,13 @@ public class OAuthService {
     private String REDIRECT_URL;
 
     private final RestTemplate restTemplate;
-
     private final MemberRepository memberRepository;
+    private final JwtProvider jwtProvider;
+
+    public TokenDto kakaoLogin(String code) {
+        String kakaoToken = this.getKaKaoAccessToken(code);
+        return this.getKakaoToken(this.getKakaoInfo(kakaoToken));
+    }
 
     public String getKaKaoAccessToken(String code) {
 
@@ -63,7 +72,7 @@ public class OAuthService {
         try {
             jsonObject = (JSONObject) jsonParser.parse(tokenJson);
         } catch (ParseException e) {
-            throw new RuntimeException(e);
+            throw new RestApiException(INVALID_PARSE_ERROR);
         }
 
         return jsonObject.get("access_token").toString();
@@ -108,7 +117,7 @@ public class OAuthService {
         return userInfo;
     }
 
-    public String getKakaoToken(Map<String, String> userInfo) {
+    public TokenDto getKakaoToken(Map<String, String> userInfo) {
 
         String email = userInfo.get("email");
         String nickname = userInfo.get("nickname");
@@ -120,7 +129,7 @@ public class OAuthService {
                 .build());
         }
 
-        return null;
+        return jwtProvider.generateTokenDto(email);
     }
 
     private boolean isExist(String email) {
