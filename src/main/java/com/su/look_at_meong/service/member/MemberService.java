@@ -13,8 +13,10 @@ import com.su.look_at_meong.model.member.dto.SignUpFormDto;
 import com.su.look_at_meong.model.member.dto.TokenDto;
 import com.su.look_at_meong.model.member.entity.Member;
 import com.su.look_at_meong.repository.MemberRepository;
+import java.util.concurrent.TimeUnit;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +28,7 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final BCryptPasswordEncoder passwordEncoder;
     private final JwtProvider jwtProvider;
+    private final RedisTemplate redisTemplate;
 
     public MemberDto signUp(SignUpFormDto request) {
         if (memberRepository.existsByEmail(request.getEmail())) {
@@ -54,7 +57,13 @@ public class MemberService {
             throw new RestApiException(PASSWORD_ENTERED_IS_INCORRECT);
         }
 
-        return jwtProvider.generateTokenDto(member.getEmail());
+        String email = member.getEmail();
+        TokenDto tokenDto = jwtProvider.generateTokenDto(email);
+
+        redisTemplate.opsForValue()
+            .set("RT:" + email, tokenDto.getRefreshToken(),tokenDto.getAccessTokenExpiresIn(), TimeUnit.MICROSECONDS);
+
+        return tokenDto;
     }
 
     private boolean validationLogin(String formPassword, String encodingPassword) {

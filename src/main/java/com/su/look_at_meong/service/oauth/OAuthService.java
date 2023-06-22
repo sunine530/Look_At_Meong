@@ -4,16 +4,20 @@ import static com.su.look_at_meong.exception.constant.MemberErrorCode.INVALID_PA
 
 import com.su.look_at_meong.config.jwt.JwtProvider;
 import com.su.look_at_meong.exception.RestApiException;
+import com.su.look_at_meong.model.member.dto.LogoutDto;
 import com.su.look_at_meong.model.member.dto.TokenDto;
 import com.su.look_at_meong.model.member.entity.Member;
 import com.su.look_at_meong.repository.MemberRepository;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
+import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -36,6 +40,7 @@ public class OAuthService {
     private final RestTemplate restTemplate;
     private final MemberRepository memberRepository;
     private final JwtProvider jwtProvider;
+    private final RedisTemplate redisTemplate;
 
     public TokenDto kakaoLogin(String code) {
         String kakaoToken = this.getKaKaoAccessToken(code);
@@ -129,10 +134,31 @@ public class OAuthService {
                 .build());
         }
 
-        return jwtProvider.generateTokenDto(email);
+        TokenDto tokenDto = jwtProvider.generateTokenDto(email);
+
+        redisTemplate.opsForValue()
+            .set("RT:" + email, tokenDto.getRefreshToken(), tokenDto.getAccessTokenExpiresIn(), TimeUnit.MICROSECONDS);
+
+        return tokenDto;
     }
 
     private boolean isExist(String email) {
         return memberRepository.existsByEmail(email);
+    }
+
+    public LogoutDto kakaoLogout(HttpServletRequest request) {
+
+        String accessToken = request.getParameter("state");
+        String email = jwtProvider.getEmail(accessToken);
+
+        if (redisTemplate.opsForValue().get("RF:" + email) != null) {
+            redisTemplate.delete("RF:" + email);
+        }
+
+        long expiration = jwtProvider.getExpiration(accessToken);
+        redisTemplate.opsForValue()
+            .set("BLOCK:" + accessToken, "logout", expiration, TimeUnit.MICROSECONDS);
+
+        return LogoutDto.builder().email(email).build();
     }
 }
