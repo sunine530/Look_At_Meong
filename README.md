@@ -31,4 +31,4 @@
 - [ ] 검색(키워드 별로 검색)
 - [ ] 채팅
 
-## [🗄️ API 명세서]([https://www.notion.so/API-fe8f6d33103240dfa3221b0f331fa53d?pvs=4](https://www.notion.so/API-fe8f6d33103240dfa3221b0f331fa53d?pvs=4)https://www.notion.so/API-fe8f6d33103240dfa3221b0f331fa53d?pvs=4)
+## [🗄️ API 명세서](https://pumped-impulse-1b1.notion.site/API-fe8f6d33103240dfa3221b0f331fa53d?pvs=4)
