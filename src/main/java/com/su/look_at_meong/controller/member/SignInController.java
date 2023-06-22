@@ -1,8 +1,6 @@
 package com.su.look_at_meong.controller.member;
 
-import com.su.look_at_meong.model.member.dto.MemberDto;
 import com.su.look_at_meong.model.member.dto.SignInDto;
-import com.su.look_at_meong.model.member.dto.SignUpFormDto;
 import com.su.look_at_meong.model.member.dto.TokenDto;
 import com.su.look_at_meong.service.member.MemberService;
 import javax.validation.Valid;

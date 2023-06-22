@@ -7,7 +7,6 @@ import static com.su.look_at_meong.exception.constant.MemberErrorCode.PASSWORD_E
 import com.su.look_at_meong.config.jwt.JwtProvider;
 import com.su.look_at_meong.constatnt.Role;
 import com.su.look_at_meong.exception.RestApiException;
-import com.su.look_at_meong.exception.constant.MemberErrorCode;
 import com.su.look_at_meong.model.member.dto.MemberDto;
 import com.su.look_at_meong.model.member.dto.SignInDto;
 import com.su.look_at_meong.model.member.dto.SignUpFormDto;

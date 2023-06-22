@@ -9,11 +9,29 @@ Content-Type: application/json
   "phone": "010-1111-1111"
 }
 
-###로그인 성공
+### 로그인 성공
 POST http://localhost:8081/signIn/member
 Content-Type: application/json
 
 {
   "email": "test@test.com",
   "password": "1234"
+}
+
+### 로그인 실패 - 이메일 입력 오류
+POST http://localhost:8081/signIn/member
+Content-Type: application/json
+
+{
+  "email": "fail@test.com",
+  "password": "1234"
+}
+
+### 로그인 실패 - 비밀번호 입력 오류
+POST http://localhost:8081/signIn/member
+Content-Type: application/json
+
+{
+  "email": "test@test.com",
+  "password": "1111"
 }
