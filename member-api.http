@@ -3,7 +3,7 @@ POST http://localhost:8081/signup/member
 Content-Type: application/json
 
 {
-  "email": "test@test.com",
+  "email": "test123@test.com",
   "password": "1234",
   "name": "홍길동",
   "phone": "010-1111-1111"
@@ -34,4 +34,16 @@ Content-Type: application/json
 {
   "email": "test@test.com",
   "password": "1111"
+}
+
+### 회원 정보 수정
+POST http://localhost:8081/modify/member
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QHRlc3QuY29tIiwiYXV0aCI6Ik1FTUJFUiIsImV4cCI6MTY4NzUwNDgxN30.nt5YvTYSTwSfMYDJNudwb6pVlLbwN5t_y-4vP78p6e8ajpJ7lPEwnTnPOsbxyy-e-nNxmzC3g4MdevLU5AfKZg
+
+{
+  "currentPassword": "1234",
+  "updatePassword": "",
+  "name": "김나나",
+  "phone": "010-2222-1111"
 }
