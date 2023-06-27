@@ -43,4 +43,9 @@ public class Member extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    public void updateMember(ModifyMember modifyMember) {
+        this.setName(modifyMember.getName());
+        this.setPhone(modifyMember.getPhone());
+    }
 }

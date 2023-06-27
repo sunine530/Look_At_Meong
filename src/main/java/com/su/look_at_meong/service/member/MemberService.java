@@ -75,19 +75,18 @@ public class MemberService {
 
     public ModifyMemberDto modifyMemberInfo(String email, ModifyMember modifyMember) {
 
-        var member = memberRepository.findByEmail(email)
+        Member member = memberRepository.findByEmail(email)
             .orElseThrow(() -> new RestApiException(NOT_FOUND_MEMBER));
 
         if (!passwordEncoder.matches(modifyMember.getCurrentPassword(), member.getPassword())) {
             throw new RestApiException(PASSWORD_ENTERED_IS_INCORRECT);
         }
 
-        member.setName(modifyMember.getName());
-        member.setPhone(modifyMember.getPhone());
-
         if (!modifyMember.getUpdatePassword().isEmpty()) {
             member.setPassword(passwordEncoder.encode(modifyMember.getUpdatePassword()));
         }
+
+        member.updateMember(modifyMember);
 
         return new ModifyMemberDto().from(memberRepository.save(member));
     }

@@ -14,6 +14,7 @@ import java.security.Key;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import java.util.stream.Collectors;
 import lombok.Getter;
 import lombok.Setter;
@@ -39,6 +40,7 @@ public class JwtProvider {
     private static final String CLAIM_KEY = "email";
     private static final long ACCESS_TOKEN_EXPIRE_TIME = 1000 * 60 * 30; // access 30분
     private static final long REFRESH_TOKEN_EXPIRE_TIME = 1000 * 60 * 60 * 24 * 7; // refresh 7일
+    private static final String ROLE = "MEMBER";
 
     public JwtProvider(@Value("${spring.jwt.secret}") String secretKey) {
         byte[] keyBytes = Decoders.BASE64.decode(secretKey);
@@ -72,24 +74,10 @@ public class JwtProvider {
             .build();
     }
 
-    public Authentication getAuthentication(String accessToken) {
+    public UsernamePasswordAuthenticationToken getAuthentication(String accessToken) {
 
-        // 토큰 복호화
-        Claims claims = parseClaims(accessToken);
-
-        if (claims.get(AUTHORITIES_KEY) == null) {
-            throw new RuntimeException("권한 정보가 없는 토큰입니다.");
-        }
-
-        // 클레임으로 권한 정보 가져오기
-        Collection<? extends GrantedAuthority> authorities =
-            Arrays.stream(claims.get(AUTHORITIES_KEY).toString().split(","))
-                .map(SimpleGrantedAuthority::new)
-                .collect(Collectors.toList());
-
-        UserDetails principal = new User(claims.getSubject(), "", authorities);
-
-        return new UsernamePasswordAuthenticationToken(principal, "", authorities);
+        return new UsernamePasswordAuthenticationToken(getEmail(accessToken), null,
+            List.of(new SimpleGrantedAuthority(ROLE)));
     }
 
     public String getEmail(String token) {

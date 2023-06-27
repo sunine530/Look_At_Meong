@@ -6,7 +6,7 @@ import com.su.look_at_meong.service.member.MemberService;
 import java.security.Principal;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,7 +18,7 @@ public class MemberInfoModifyController {
 
     private final MemberService memberService;
 
-    @PostMapping("/member")
+    @PutMapping("/member")
     public ResponseEntity<ModifyMemberDto> modify(Principal principal
         , @RequestBody ModifyMember modifyMember) {
 
