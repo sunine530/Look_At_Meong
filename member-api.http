@@ -35,3 +35,15 @@ Content-Type: application/json
   "email": "test@test.com",
   "password": "1111"
 }
+
+### 회원 정보 수정
+PUT http://localhost:8081/modify/member
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QHRlc3QuY29tIiwiYXV0aCI6Ik1FTUJFUiIsImV4cCI6MTY4Nzg1ODY4MX0.ETBnsd2u-OfqmKKziAhVYOrvFO9UcPBtUW7lWAMJ8xAQL1O8T9Mu0MenP01fR5ogHXF5m_-GeSzYvGlOODPLPg
+
+{
+  "currentPassword": "1234",
+  "updatePassword": "",
+  "name": "김나나",
+  "phone": "010-2222-1111"
+}

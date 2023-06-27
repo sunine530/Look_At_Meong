@@ -30,7 +30,7 @@ public class SecurityConfig {
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
             .authorizeRequests()
-            .antMatchers("/signup/**", "/signIn/**", "/oauth/**").permitAll()
+            .antMatchers("/signup/**", "/signIn/**", "/oauth/**", "/modify/**").permitAll()
             .and()
             .addFilterBefore(new JwtAuthenticationFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class)
             .build();

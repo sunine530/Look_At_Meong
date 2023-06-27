@@ -8,11 +8,14 @@ import com.su.look_at_meong.config.jwt.JwtProvider;
 import com.su.look_at_meong.constatnt.Role;
 import com.su.look_at_meong.exception.RestApiException;
 import com.su.look_at_meong.model.member.dto.MemberDto;
+import com.su.look_at_meong.model.member.dto.ModifyMemberDto;
 import com.su.look_at_meong.model.member.dto.SignInDto;
 import com.su.look_at_meong.model.member.dto.SignUpFormDto;
 import com.su.look_at_meong.model.member.dto.TokenDto;
 import com.su.look_at_meong.model.member.entity.Member;
+import com.su.look_at_meong.model.member.entity.ModifyMember;
 import com.su.look_at_meong.repository.MemberRepository;
+import java.time.LocalDateTime;
 import java.util.concurrent.TimeUnit;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -68,5 +71,23 @@ public class MemberService {
 
     private boolean validationLogin(String formPassword, String encodingPassword) {
         return passwordEncoder.matches(formPassword, encodingPassword);
+    }
+
+    public ModifyMemberDto modifyMemberInfo(String email, ModifyMember modifyMember) {
+
+        Member member = memberRepository.findByEmail(email)
+            .orElseThrow(() -> new RestApiException(NOT_FOUND_MEMBER));
+
+        if (!passwordEncoder.matches(modifyMember.getCurrentPassword(), member.getPassword())) {
+            throw new RestApiException(PASSWORD_ENTERED_IS_INCORRECT);
+        }
+
+        if (!modifyMember.getUpdatePassword().isEmpty()) {
+            member.setPassword(passwordEncoder.encode(modifyMember.getUpdatePassword()));
+        }
+
+        member.updateMember(modifyMember);
+
+        return new ModifyMemberDto().from(memberRepository.save(member));
     }
 }
