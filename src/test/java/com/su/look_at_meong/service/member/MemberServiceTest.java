@@ -1,6 +1,6 @@
 package com.su.look_at_meong.service.member;
 
-import static com.su.look_at_meong.constatnt.Role.MEMBER;
+import static com.su.look_at_meong.model.member.constant.Role.MEMBER;
 import static com.su.look_at_meong.exception.constant.MemberErrorCode.NOT_FOUND_MEMBER;
 import static com.su.look_at_meong.exception.constant.MemberErrorCode.PASSWORD_ENTERED_IS_INCORRECT;
 import static org.junit.jupiter.api.Assertions.assertEquals;

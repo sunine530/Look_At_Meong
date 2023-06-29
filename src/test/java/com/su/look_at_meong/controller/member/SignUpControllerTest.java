@@ -1,7 +1,7 @@
 package com.su.look_at_meong.controller.member;
 
 
-import static com.su.look_at_meong.constatnt.Role.MEMBER;
+import static com.su.look_at_meong.model.member.constant.Role.MEMBER;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
