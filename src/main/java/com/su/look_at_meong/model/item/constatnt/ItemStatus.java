@@ -6,7 +6,7 @@ public enum ItemStatus {
     SOLD_OUT("품절")
     ;
 
-    final String status;
+    private final String status;
 
     ItemStatus(String status) {
         this.status = status;

@@ -18,10 +18,9 @@ import lombok.Setter;
 public class ItemDto {
 
     private String itemName;
-    private String price;
+    private int price;
     private String detail;
     private int stockNum;
-    private LocalDateTime verifyExpiredAt;
     private Category category;
     private ItemStatus itemStatus;
 
@@ -32,7 +31,6 @@ public class ItemDto {
         itemDto.setPrice(item.getPrice());
         itemDto.setDetail(item.getDetail());
         itemDto.setStockNum(item.getStockNum());
-        itemDto.setVerifyExpiredAt(item.getVerifyExpiredAt());
         itemDto.setCategory(item.getCategory());
         itemDto.setItemStatus(item.getItemStatus());
         return itemDto;

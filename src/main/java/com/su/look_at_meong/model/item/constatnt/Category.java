@@ -9,7 +9,7 @@ public enum Category {
     ETC("기타")
     ;
 
-    final String type;
+    private final String type;
 
     Category(String type) {
         this.type = type;

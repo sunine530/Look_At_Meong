@@ -37,15 +37,15 @@ public class Item extends BaseEntity {
     @NotNull(message = "상품 이름을 입력해주세요.")
     private String itemName;
     @NotNull(message = "가격을 입력해주세요.")
-    private String price;
+    private int price;
     @NotNull(message = "상품 설명을 입력해주세요.")
     private String detail;
     @NotNull(message = "재고를 입력해주세요.")
     private int stockNum;
-    private LocalDateTime verifyExpiredAt;
 
     @Enumerated(EnumType.STRING)
     private Category category;
     @Enumerated(EnumType.STRING)
     private ItemStatus itemStatus;
+
 }

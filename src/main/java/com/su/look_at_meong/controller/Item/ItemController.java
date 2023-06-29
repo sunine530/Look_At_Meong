@@ -21,7 +21,7 @@ public class ItemController {
 
     private final ItemService itemService;
 
-    @PostMapping
+    @PostMapping("/add")
     ResponseEntity<ItemDto> addItem(@RequestBody @Valid Item item, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()){
