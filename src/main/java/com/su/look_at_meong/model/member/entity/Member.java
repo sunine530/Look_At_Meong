@@ -1,6 +1,6 @@
 package com.su.look_at_meong.model.member.entity;
 
-import com.su.look_at_meong.constatnt.Role;
+import com.su.look_at_meong.model.member.constant.Role;
 import com.su.look_at_meong.model.BaseEntity;
 import java.time.LocalDateTime;
 import javax.persistence.Column;

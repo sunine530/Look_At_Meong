@@ -5,7 +5,7 @@ import static com.su.look_at_meong.exception.constant.MemberErrorCode.NOT_FOUND_
 import static com.su.look_at_meong.exception.constant.MemberErrorCode.PASSWORD_ENTERED_IS_INCORRECT;
 
 import com.su.look_at_meong.config.jwt.JwtProvider;
-import com.su.look_at_meong.constatnt.Role;
+import com.su.look_at_meong.model.member.constant.Role;
 import com.su.look_at_meong.exception.RestApiException;
 import com.su.look_at_meong.model.member.dto.MemberDto;
 import com.su.look_at_meong.model.member.dto.ModifyMemberDto;
@@ -15,7 +15,6 @@ import com.su.look_at_meong.model.member.dto.TokenDto;
 import com.su.look_at_meong.model.member.entity.Member;
 import com.su.look_at_meong.model.member.entity.ModifyMember;
 import com.su.look_at_meong.repository.MemberRepository;
-import java.time.LocalDateTime;
 import java.util.concurrent.TimeUnit;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
