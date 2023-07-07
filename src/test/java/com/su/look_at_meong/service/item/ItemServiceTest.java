@@ -71,6 +71,4 @@ class ItemServiceTest {
         assertEquals(SELL, captor.getValue().getItemStatus());
         assertEquals(BAG, captor.getValue().getCategory());
     }
-
-   //TODO 상품 등록 실패
 }

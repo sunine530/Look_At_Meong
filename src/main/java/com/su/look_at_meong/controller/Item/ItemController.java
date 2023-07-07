@@ -9,9 +9,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -29,5 +31,13 @@ public class ItemController {
         }
 
         return ResponseEntity.ok(itemService.addItem(item));
+    }
+
+    @PostMapping("/update")
+    public ResponseEntity<ItemDto> updateItem(@RequestBody Item updateItem, @RequestParam Long itemId) {
+
+        // TODO memberId 토큰을 통해 받을 예정
+        Long memberId = 0L;
+        return ResponseEntity.ok(itemService.updateItem(updateItem, memberId, itemId));
     }
 }
