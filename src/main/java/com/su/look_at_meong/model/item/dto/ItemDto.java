@@ -3,7 +3,6 @@ package com.su.look_at_meong.model.item.dto;
 import com.su.look_at_meong.model.item.constatnt.Category;
 import com.su.look_at_meong.model.item.constatnt.ItemStatus;
 import com.su.look_at_meong.model.item.entity.Item;
-import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -24,7 +23,7 @@ public class ItemDto {
     private Category category;
     private ItemStatus itemStatus;
 
-    public ItemDto toDto(Item item) {
+    public ItemDto toEntity(Item item) {
 
         ItemDto itemDto = new ItemDto();
         itemDto.setItemName(item.getItemName());
